@@ -3,23 +3,52 @@
   <head>
     <title>班級行事曆</title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+      }
+      
       table {
         width: 100%;
         border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
+      
       th, td {
         padding: 10px;
         text-align: left;
         border-bottom: 1px solid #ddd;
       }
+      
       th {
         background-color: #f2f2f2;
       }
+      
       .event {
         background-color: #f2f2f2;
         padding: 5px;
         border-radius: 5px;
         margin-bottom: 5px;
+      }
+      
+      #controls {
+        margin-top: 20px;
+        text-align: center;
+      }
+      
+      #controls button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -35,6 +64,10 @@
       <tbody>
       </tbody>
     </table>
+    <div id="controls">
+      <button id="changeColor">變更顏色</button>
+      <button id="changeFontSize">變更字體大小</button>
+    </div>
     <script>
       // 定義事件資料
       const events = [
@@ -59,6 +92,32 @@
         row.appendChild(eventCell);
         calendarBody.appendChild(row);
       });
+
+      // 變更顏色和字體大小的按鈕事件處理
+      const changeColorBtn = document.getElementById('changeColor');
+      const changeFontSizeBtn = document.getElementById('changeFontSize');
+
+      changeColorBtn.addEventListener('click', () => {
+        document.body.style.backgroundColor = getRandomColor();
+        document.body.style.color = getRandomColor();
+      });
+
+      changeFontSizeBtn.addEventListener('click', () => {
+        document.body.style.fontSize = getRandomFontSize();
+      });
+
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function getRandomFontSize() {
+        return Math.floor(Math.random() * (30 - 16 + 1)) + 16 + 'px';
+      }
     </script>
   </body>
   </html>
